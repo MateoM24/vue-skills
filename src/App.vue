@@ -19,7 +19,7 @@ export default {
 @import url("https:fonts.googleapis.com/css?family=Montserrat:400,700");
 
 body {
-  background-color: #ffffff;
+  background-color: #eeeeee;
   font-family: "Montserrat", "sans-serif";
   display: grid;
   grid-template-rows: auto;
