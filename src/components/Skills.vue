@@ -10,8 +10,9 @@
               v-model="skill"
               name="skill"
             />
-
-            <p class="alert" v-if="errors[0]">{{ errors[0] }}</p>
+            <transition name="alert-in">
+              <p class="alert" v-if="errors[0]">{{ errors[0] }}</p>
+            </transition>
           </validation-provider>
         </form>
       </validation-observer>
@@ -20,7 +21,6 @@
         <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
       </ul>
       <p>This are the skills that you possess</p>
-      {{ skill }}
     </div>
   </div>
 </template>
@@ -102,5 +102,23 @@ input {
   height: 1em;
   margin: 0;
   padding: 0.4em;
+}
+.alert-in-enter-active {
+  animation: bounce-in 0.5s;
+}
+.alert-in-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
