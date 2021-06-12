@@ -10,15 +10,27 @@
               v-model="skill"
               name="skill"
             />
-            <transition name="alert-in">
-              <p class="alert" v-if="errors[0]">{{ errors[0] }}</p>
+            <transition
+              mode="out-in"
+              enter-active-class="animate__animated animate__flipInX"
+              leave-active-class="animate__animated animate__flipOutX"
+            >
+              <div class="alert" v-if="errors[0]">
+                {{ errors[0] }}
+              </div>
             </transition>
           </validation-provider>
         </form>
       </validation-observer>
 
       <ul>
-        <li v-for="(data, index) in skills" :key="index">{{ data.skill }}</li>
+        <transition-group
+          name="list"
+          enter-active-class="animate__animated animate__bounceInUp"
+          leave-active-class="animate__animated animate__bounceOutDown"
+        >
+          <li v-for="data in skills" :key="data.skill">{{ data.skill }}</li>
+        </transition-group>
       </ul>
       <p>This are the skills that you possess</p>
     </div>
@@ -64,8 +76,10 @@ export default {
   },
 };
 </script>
-
+  
 <style scoped>
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+
 .holder {
   background: #fff;
 }
@@ -102,23 +116,5 @@ input {
   height: 1em;
   margin: 0;
   padding: 0.4em;
-}
-.alert-in-enter-active {
-  animation: bounce-in 0.5s;
-}
-.alert-in-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 </style>
