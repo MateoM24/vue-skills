@@ -29,7 +29,10 @@
           enter-active-class="animate__animated animate__bounceInUp"
           leave-active-class="animate__animated animate__bounceOutDown"
         >
-          <li v-for="data in skills" :key="data.skill">{{ data.skill }}</li>
+          <li v-for="(data, index) in skills" :key="index">
+            {{ data.skill }}
+            <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
+          </li>
         </transition-group>
       </ul>
       <p>This are the skills that you possess</p>
@@ -73,12 +76,16 @@ export default {
       this.skills.push({ skill: this.skill });
       this.skill = "";
     },
+    remove(index) {
+      this.skills.splice(index, 1);
+    },
   },
 };
 </script>
   
 <style scoped>
 @import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
 .holder {
   background: #fff;
@@ -116,5 +123,9 @@ input {
   height: 1em;
   margin: 0;
   padding: 0.4em;
+}
+i {
+  float: right;
+  cursor: pointer;
 }
 </style>
